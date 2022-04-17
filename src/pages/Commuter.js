@@ -13,7 +13,7 @@ const Commuter = () => {
       <header className="App-header">
         <Today />
         <Clock />
-        <p></p>
+        <br></br>
         <Prediction />
       </header>
     </div>

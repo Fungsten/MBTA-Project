@@ -31,6 +31,7 @@ const Prediction = () => {
                 console.error(error);
             })
     }
+    
     useEffect(() => {
         fetchPrediction(); // for intial data pull
         setInterval(() => {
@@ -103,7 +104,6 @@ const Prediction = () => {
         var minutes = militaryTime[1];
 
         var standardTime;
-
         if (hours > 0 && hours <= 12) {
             standardTime = "" + hours;
         } else if (hours > 12) {
@@ -119,6 +119,9 @@ const Prediction = () => {
     }
 
     try {
+        // although we tried to sort by departure_time when fetching,
+        // this pushes all the null departure_times to the top
+        // resort by departure_time from the schedule
         const departure_data = linesState.data.data.slice();
         departure_data.sort((a, b) => (getDepartureTimeFromSchedule(a.relationships.schedule) > getDepartureTimeFromSchedule(b.relationships.schedule)) ? 1 : -1);
         return (

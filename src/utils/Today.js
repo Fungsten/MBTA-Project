@@ -1,5 +1,8 @@
 import React, { useEffect, useState } from 'react'
 
+/*
+Gives day of the week.
+ */
 function Today() {
     const [todayState, setTodayState] = useState();
 

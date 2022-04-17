@@ -21,6 +21,7 @@ It also makes sure to use additional query parameters for location, commuter rai
 And it refreshes every minute, which is far below the rate limit for an application without an API key.
 
 Do note that the board will not display anything when there are no upcoming trips leaving from North Station,
-so it will be empty at 1:00am.
+so it will be empty at 1:00am. Otherwise, the board will display up to 10 upcoming trips (less if there are not as many predictions available
+at a particular time).
 
 Thank you for taking the time to check this out!

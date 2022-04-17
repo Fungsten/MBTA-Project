@@ -89,7 +89,7 @@ const Schedule = () => {
         setInterval(() => {
             const date = new Date();
             fetchSchedule(date);
-        }, 1000 * 60) // refresh data every 15 minutes
+        }, 1000 * 60) // refresh data every minute
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [])

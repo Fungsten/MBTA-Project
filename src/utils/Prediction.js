@@ -11,8 +11,8 @@ const Prediction = () => {
         const prediction = endpoint + 'predictions'
         + '?filter[stop]=place-north'
         + '&sort=departure_time'
-        + '&filter[route_type]=2'
-        + '&filter[direction_id]=0'
+        + '&filter[route_type]=2' // 2 for commuter rail
+        + '&filter[direction_id]=0' // 0 for departures
         + '&include=schedule'
         + '&page[limit]=' + boardSize;
 
@@ -32,13 +32,17 @@ const Prediction = () => {
             })
     }
     useEffect(() => {
-        fetchPrediction();
+        fetchPrediction(); // for intial data pull
         setInterval(() => {
             fetchPrediction();
         }, 1000 * 60) // refreshes once every minute
     // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [])
 
+    /*
+    In practice, the departure_time field is often null.
+    We go into the paired Schedule data to grab the departure_time.
+    */
     const getDepartureTimeFromSchedule = (schedule) => {
         const scheduleID = schedule.data.id;
         for (var i = 0; i < linesState.data.included.length; i++) {
@@ -57,15 +61,24 @@ const Prediction = () => {
     }
 
     const getDestination = (route) => {
+        if (route == null) {
+            return "ERROR";
+        }
         return route.data.id.slice(3);
     }
 
     const getTrainNumber = (trip) => {
+        if (trip == null) {
+            return "ERROR";
+        }
         var names = trip.data.id.split("-");
         return names[2];
     }
 
     const getTrackNumber = (stop) => {
+        if (stop == null) {
+            return "TBD";
+        }
         var names = stop.data.id.split("-");
         if (names.length < 3) {
             return "TBD";
@@ -74,9 +87,15 @@ const Prediction = () => {
     }
 
     const getStatus = (attr) => {
+        if (attr == null) {
+            return "On time"; // be optimistic?
+        }
         return attr.status;
     }
 
+    /*
+    Takes your 24:00 time and converts it to 12:00 AM/PM
+    */
     const convertTime = (militaryTime) => {
         militaryTime = militaryTime.split(':')
 

@@ -100,7 +100,7 @@ const Prediction = () => {
     }
 
     try {
-        const departure_data = linesState.data.data.slice().reverse();
+        const departure_data = linesState.data.data.slice();
         departure_data.sort((a, b) => (getDepartureTimeFromSchedule(a.relationships.schedule) > getDepartureTimeFromSchedule(b.relationships.schedule)) ? 1 : -1);
         return (
             <div>

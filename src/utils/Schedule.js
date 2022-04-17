@@ -1,7 +1,9 @@
+// now unused
+
 import React, { useEffect, useState } from "react"
 
 const Schedule = () => {
-    const axios = require('axios')
+    const axios = require('axios');
     const [linesState, setLinesState] = useState([]);
     const boardSize = 9;
 
@@ -28,7 +30,7 @@ const Schedule = () => {
     }
 
     const getHour = (date) => {
-        return pad(date.getHours() - 6);
+        return pad(date.getHours());
     }
 
     const getMinute = (date) => {
@@ -72,8 +74,12 @@ const Schedule = () => {
     }
 
     const fetchTrainNumber = (id) => {
-        console.log(id);
         const names = id.split("-");
+        return names[2];
+    }
+
+    const getTrackNumber = (stop) => {
+        var names = stop.data.id.split("-");
         return names[2];
     }
 
@@ -83,7 +89,9 @@ const Schedule = () => {
         setInterval(() => {
             const date = new Date();
             fetchSchedule(date);
-        }, 1000 * 60 * 15) // refresh data every 15 minutes
+        }, 1000 * 60) // refresh data every 15 minutes
+
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [])
     
 
@@ -105,7 +113,7 @@ const Schedule = () => {
                                 <td>{line.attributes.departure_time.slice(11, -9)} &emsp;</td>
                                 <td>{line.relationships.route.data.id.slice(3)} &emsp;</td>
                                 <td>{fetchTrainNumber(line.relationships.trip.data.id)} &emsp;</td>
-                                <td>TBD</td>
+                                <td>{getTrackNumber(line.relationships.stop)}</td>
                                 <td>{fetchStatus(line.relationships.prediction.data)} &emsp;</td>
                             </tr>
                         )

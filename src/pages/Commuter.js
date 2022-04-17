@@ -1,6 +1,6 @@
 import React from "react";
 import Today from "../utils/Today";
-import Schedule from "../utils/Schedule";
+import Prediction from "../utils/Prediction";
   
 const Commuter = () => {
 
@@ -12,7 +12,7 @@ const Commuter = () => {
       <header className="App-header">
         Today is: <Today />
         <p></p>
-        <Schedule />
+        <Prediction />
       </header>
     </div>
   );

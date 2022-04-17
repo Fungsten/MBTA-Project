@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react"
 
 const Schedule = () => {
-    const axios = require('axios')
+    const axios = require('axios');
     const [linesState, setLinesState] = useState([]);
     const boardSize = 9;
 
@@ -28,7 +28,7 @@ const Schedule = () => {
     }
 
     const getHour = (date) => {
-        return pad(date.getHours() - 6);
+        return pad(date.getHours());
     }
 
     const getMinute = (date) => {
@@ -57,6 +57,9 @@ const Schedule = () => {
             })
             .then(data => {
                 setLinesState(data);
+                // for (var i = 0; i < data.length; i++) {
+                //     var prediction = data[i].data.relationships.prediction
+                // }
             })
             .catch(error => {
                 console.error(error);

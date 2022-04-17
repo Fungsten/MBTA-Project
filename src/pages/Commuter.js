@@ -1,4 +1,5 @@
 import React from "react";
+import Clock from "../utils/Clock";
 import Today from "../utils/Today";
 import Prediction from "../utils/Prediction";
   
@@ -10,8 +11,9 @@ const Commuter = () => {
         North Station Commuter Rail Schedule
       </h1>
       <header className="App-header">
-        Today is: <Today />
-        <p></p>
+        <Today />
+        <Clock />
+        <br></br>
         <Prediction />
       </header>
     </div>
